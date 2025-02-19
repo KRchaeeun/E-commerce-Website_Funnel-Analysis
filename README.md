@@ -36,9 +36,9 @@ This is a project about Funnel Analysis using E-commerce Website dataset.
 ### 📌 Key Funnel Flow for Analysis
 This dataset allows the analysis of the **drop-off rate** and **conversion rate** at each step as users navigate through the website. The funnel steps are as follows:
 
-1. **Homepage Visit** (`home_page_table`)
-2. **Search Page Visit** (`search_page_table`)
-3. **Payment Page Visit** (`payment_page_table`)
-4. **Payment Confirmation** (`payment_confirmation_table`)
+1. Homepage Visit (`home_page_table`)
+2. Search Page Visit (`search_page_table`)
+3. Payment Page Visit (`payment_page_table`)
+4. Payment Confirmation (`payment_confirmation_table`)
 
 This flow shows how users move from the homepage to the search page, proceed to the payment page, and finally reach the payment confirmation step. The funnel analysis will help identify the drop-off rates at each stage, providing insights into where users are leaving the site.
