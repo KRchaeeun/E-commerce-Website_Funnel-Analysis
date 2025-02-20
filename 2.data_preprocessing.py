@@ -37,11 +37,11 @@ print(merged_df.info(), "\n")
 print(merged_df.head(), "\n")
 
 # 병합된 데이터 저장
-merged_df.to_csv(os.path.join(data_path, "merged_data.csv"), index=False)
+merged_df.to_csv("merged_data.csv", index=False)
 print("✅ 병합된 데이터 저장 완료: merged_data.csv")
 
 # 병합된 데이터 define
-merged_df = pd.read_csv(os.path.join(data_path, "merged_data.csv"))
+merged_df = pd.read_csv("merged_data.csv")
 
 # 비정상적인 funnel 흐름 데이터 확인
 invalid_cases = {
