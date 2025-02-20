@@ -249,22 +249,11 @@ for case, df in invalid_cases.items():
 </p>
 
 ### 📌 Funnel Analysis
+The results of this Funnel analysis reveal a significant drop-off pattern at each stage.
 
-In this Funnel analysis, we tracked the user journey from visiting the homepage to progressing through the **search → payment → payment confirmation** stages.
-
-#### 1️⃣ Key Conversion Rate Analysis
-- Homepage Visit → Payment Page Visit: **13.34%** (Drop-off: **86.66%**)  
-   - Since search page data is missing, the intermediate steps are not visible.  
-   - However, it appears that most users drop off before reaching the payment stage.  
-
-- Payment Page Visit → Payment Completion: **7.50%** (Drop-off: **92.50%**)  
-  - Most users who reached the payment page did **not** complete the payment.  
-  - There might be obstacles in the payment process affecting conversions.  
-
-#### 2️⃣ Key Drop-off Points
-- The highest drop-off occurs between: **Homepage → Payment Page** (**86.66%**)  
-- Final purchase completion rate: **7.50%** among users who reached the payment page.  
-  - Further analysis is needed to identify reasons for user drop-off at the payment stage.  
+- Homepage → Search Page (Conversion Rate: 50%) → Half of the users do not proceed to the search page.  
+- Search Page → Payment Page (Conversion Rate: 13.34%) → Most users who reach the search page do not proceed to the payment stage.  
+- Payment Page → Payment Completion (Conversion Rate: 7.50%) → **92.50%** of users who reach the payment page drop off without completing the payment.  
 
 ### 📌 Python Code
 ```python
