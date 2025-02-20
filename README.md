@@ -6,10 +6,14 @@ This is a project about Funnel Analysis using E-commerce Website dataset.
 - Source: [Kaggle](https://www.kaggle.com/datasets/aerodinamicc/ecommerce-website-funnel-analysis)
 - Description: Provides information on how users navigate through various pages of the website.
 
+<br>
+
 ## Project Objectives
 - Perform **Funnel Analysis** based on user behavior data within the website.
 - Analyze **drop-off rates** and **conversion rates** at each stage.
 - Derive insights to improve **user experience**.
+
+<br>
 
 ## Project Process
 1. Understanding the Data – Analyze dataset structure and variables.
@@ -17,6 +21,8 @@ This is a project about Funnel Analysis using E-commerce Website dataset.
 3. **Funnel Analysis** – Calculate stage-wise conversion rates and drop-off rates.
 4. Visualization Dashboard – Build an analytical dashboard using **Tableau**.
 5. Identify Issues & Suggest Improvements – Derive insights and propose optimizations.
+
+<br>
 
 ## Understanding the Data
 
@@ -64,21 +70,21 @@ This flow shows how users move from the homepage to the search page, proceed to 
 
 ### 📌 Handling Missing Values
 - No missing values were found in any of the files.
-<p align="center">
-  <img src="./readme_img/missing1.png" alt="number of missing data">
+<p style="margin-left: 35px;">
+  <img src="./readme_img/missing1.png" alt="number of missing data" width="60%">
 </p>
-<p align="center">
-  <img src="./readme_img/missing2.png" alt="number of missing data">
+<p style="margin-left: 35px;">
+  <img src="./readme_img/missing2.png" alt="number of missing data" width="60%">
 </p>
-<p align="center">
-  <img src="./readme_img/missing3.png" alt="number of missing data">
+<p style="margin-left: 35px;">
+  <img src="./readme_img/missing3.png" alt="number of missing data" width="30%">
 </p>
 
 
 ### 📌 Removing Duplicates
 - No duplicate rows were found in any of the files.
-<p align="center">
-  <img src="./readme_img/duplicate.png" alt="number of duplicates data">
+<p style="margin-left: 35px;">
+  <img src="./readme_img/duplicate.png" alt="number of duplicates data" width="30%">
 </p>
 
 ### 📌 Data Merging
@@ -117,8 +123,8 @@ This flow shows how users move from the homepage to the search page, proceed to 
 | `payment_visited`   | Payment page visit status (1 = Visited, 0 = Not visited) |
 | `payment_confirmed` | Payment completion status (1 = Completed, 0 = Not completed) |
 
-<p align="center">
-  <img src="./readme_img/merged_overview.png" alt="overview merged data">
+<p align="left">
+  <img src="./readme_img/merged_overview.png" alt="overview merged data" width="50%">
 </p>
 
 ### 🖍️ Additional Checks
@@ -130,6 +136,6 @@ Check for anomalies in the data, such as:
 <br>
 
 - No anomalies were found.
-<p align="center">
-  <img src="./readme_img/anomalies.png" alt="anomalies data">
+<p style="margin-left: 35px;">
+  <img src="./readme_img/anomalies.png" alt="anomalies data" width="30%">
 </p>
