@@ -224,3 +224,81 @@ for case, df in invalid_cases.items():
     if not df.empty:
         print(df[["user_id", "home_visited", "search_visited", "payment_visited", "payment_confirmed"]].head())
 ```
+
+<br>
+
+## Funnel Analysis
+
+### 📌 Funnel Analysis Process
+#### 1️⃣ Calculate the number of users at each stage
+- Number of users with `home_visited = 1`
+- Number of users with `search_visited = 1`
+- Number of users with `payment_visited = 1`
+- Number of users with `payment_confirmed = 1`
+
+#### 2️⃣ Calculate Conversion Rate (%)
+- Formula: `(Number of users at the current stage) ÷ (Number of users at the previous stage) × 100`
+- Determine how many users proceed to the next stage.
+
+#### 3️⃣ Calculate Drop-off Rate (%)
+- Formula: `100 - Conversion Rate`
+- Identify at which stage users drop off the most.
+
+<p align="center">
+   <img src="./readme_img/funnel_result.png" alt="result of funnel analysis" width="30%">
+</p>
+
+### 📌 Funnel Analysis
+
+In this Funnel analysis, we tracked the user journey from visiting the homepage to progressing through the **search → payment → payment confirmation** stages.
+
+#### 1️⃣ Key Conversion Rate Analysis
+- Homepage Visit → Payment Page Visit: **13.34%** (Drop-off: **86.66%**)  
+   - Since search page data is missing, the intermediate steps are not visible.  
+   - However, it appears that most users drop off before reaching the payment stage.  
+
+- Payment Page Visit → Payment Completion: **7.50%** (Drop-off: **92.50%**)  
+  - Most users who reached the payment page did **not** complete the payment.  
+  - There might be obstacles in the payment process affecting conversions.  
+
+#### 2️⃣ Key Drop-off Points
+- The highest drop-off occurs between: **Homepage → Payment Page** (**86.66%**)  
+- Final purchase completion rate: **7.50%** among users who reached the payment page.  
+  - Further analysis is needed to identify reasons for user drop-off at the payment stage.  
+
+### 📌 Python Code
+```python
+# 각 단계별 사용자 수 계산
+home_users = merged_df["home_visited"].sum()
+search_users = merged_df["search_visited"].sum()
+payment_users = merged_df["payment_visited"].sum()
+confirmed_users = merged_df["payment_confirmed"].sum()
+
+# 전환율(Conversion Rate) 계산 
+# → 분모가 0명이면 연산할 때 0으로 나누는 오류 즉, ZeroDivisionError이 발생할 수 있으므로 if절 추가
+search_conversion = (search_users / home_users) * 100 if home_users > 0 else 0
+payment_conversion = (payment_users / search_users) * 100 if search_users > 0 else 0
+confirmed_conversion = (confirmed_users / payment_users) * 100 if payment_users > 0 else 0
+
+# 이탈률(Drop-off Rate) 계산
+search_dropoff = 100 - search_conversion
+payment_dropoff = 100 - payment_conversion
+confirmed_dropoff = 100 - confirmed_conversion
+
+# 데이터프레임 생성
+funnel_data = pd.DataFrame({
+    "단계": ["홈페이지 방문", "검색 페이지 방문", "결제 페이지 방문", "결제 완료"],
+    "사용자 수": [home_users, search_users, payment_users, confirmed_users],
+    "전환율(%)": [100, search_conversion, payment_conversion, confirmed_conversion],  # 첫 단계는 100%
+    "이탈률(%)": [0, search_dropoff, payment_dropoff, confirmed_dropoff]  # 첫 단계는 0%
+})
+
+# 결과 출력
+print("\n📌 단계별 Funnel 분석 결과")
+print(funnel_data)
+
+
+# CSV 저장 (Excel 한글 깨짐 방지)
+funnel_data.to_csv("funnel_analysis.csv", index=False, encoding="utf-8-sig")
+print("\n✅ Funnel 분석 데이터 저장 완료: funnel_analysis.csv")
+```
