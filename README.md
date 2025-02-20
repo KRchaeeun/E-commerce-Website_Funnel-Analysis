@@ -71,17 +71,22 @@ This flow shows how users move from the homepage to the search page, proceed to 
 ### 📌 Handling Missing Values
 - No missing values were found in any of the files.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="./readme_img/missing1.png" alt="number of missing data" width="60%">
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="./readme_img/missing2.png" alt="number of missing data" width="60%">
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="./readme_img/missing3.png" alt="number of missing data" width="30%">
+<p align="center">
+   <img src="./readme_img/missing1.png" alt="number of missing data" width="60%">
+</p>
+<p align="center">
+   <img src="./readme_img/missing2.png" alt="number of missing data" width="60%">
+</p>
+<p align="center">
+   <img src="./readme_img/missing3.png" alt="number of missing data" width="30%">
+</p>
 
 
 ### 📌 Removing Duplicates
 - No duplicate rows were found in any of the files.
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="./readme_img/duplicate.png" alt="number of duplicates data" width="30%">
+<p align="center">
+   <img src="./readme_img/duplicate.png" alt="number of duplicates data" width="30%">
+</p>
 
 ### 📌 Data Merging
 
@@ -119,8 +124,8 @@ This flow shows how users move from the homepage to the search page, proceed to 
 | `payment_visited`   | Payment page visit status (1 = Visited, 0 = Not visited) |
 | `payment_confirmed` | Payment completion status (1 = Completed, 0 = Not completed) |
 
-<p align="left">
-  <img src="./readme_img/merged_overview.png" alt="overview merged data" width="50%">
+<p align="center">
+  <img src="./readme_img/merged_overview.png" alt="overview merged data" width="55%">
 </p>
 
 ### 🖍️ Additional Checks
@@ -132,5 +137,6 @@ Check for anomalies in the data, such as:
 <br>
 
 - No anomalies were found.
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="./readme_img/anomalies.png" alt="anomalies data" width="30%">
+<p align="center">
+   <img src="./readme_img/anomalies.png" alt="anomalies data" width="30%">
+</p>
