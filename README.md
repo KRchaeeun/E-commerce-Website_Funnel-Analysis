@@ -64,16 +64,6 @@ for file in file_names:
     print(df.info(), "\n")  # 데이터 타입 및 결측치 확인
     print(df.head(), "\n")  # 상위 5개 행 출력
     print("="*50, "\n")  # 가독성을 위해...
-    
-    # 결측치 개수 출력
-    missing_values = df.isnull().sum()  # 각 컬럼별 결측치 개수
-    print(f"❗ {file} 결측치 개수:\n{missing_values}\n")
-    print("="*50, "\n")
-    
-    # 중복 행 개수 출력력
-    duplicate_count = df.duplicated().sum()  # 각 컬럼별 중복 개수수
-    print(f"📎 {file} 중복된 행 개수: {duplicate_count}개\n")
-    print("="*50, "\n")
 ```
 
 <br>
@@ -110,12 +100,27 @@ for file in file_names:
    <img src="./readme_img/missing3.png" alt="number of missing data" width="30%">
 </p>
 
+<br>
+
+```python
+# 결측치 개수 출력
+missing_values = df.isnull().sum()  # 각 컬럼별 결측치 개수
+print(f"❗ {file} 결측치 개수:\n{missing_values}\n")
+print("="*50, "\n")
+```
 
 ### 📌 Removing Duplicates
 - No duplicate rows were found in any of the files.
 <p align="center">
    <img src="./readme_img/duplicate.png" alt="number of duplicates data" width="30%">
 </p>
+
+```python
+# 중복 행 개수 출력
+duplicate_count = df.duplicated().sum()  # 각 컬럼별 중복 개수수
+print(f"📎 {file} 중복된 행 개수: {duplicate_count}개\n")
+print("="*50, "\n")
+```
 
 ### 📌 Data Merging
 
@@ -287,7 +292,11 @@ print("\n📌 단계별 Funnel 분석 결과")
 print(funnel_data)
 
 
-# CSV 저장 (Excel 한글 깨짐 방지)
+# CSV 저장 (Excel 한글 깨짐 방지를 위한 encoding)
+# → 데이터가 크거나 일관된 전환율이 필요하다면 
+# Python에서 전환율과 이탈률을 계산 후, Tableau에서 시각화하는게 더 유리하지만 
+# 해당 데이터는 크지 않으므로 이 프로젝트에서는 Tableau에서 따로 계산 후 시각화함
+# 연습삼아 계산 후 파일 저장까지 진행
 funnel_data.to_csv("funnel_analysis.csv", index=False, encoding="utf-8-sig")
 print("\n✅ Funnel 분석 데이터 저장 완료: funnel_analysis.csv")
 ```

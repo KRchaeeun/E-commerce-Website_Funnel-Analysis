@@ -27,7 +27,7 @@ for file in file_names:
     print(f"❗ {file} 결측치 개수:\n{missing_values}\n")
     print("="*50, "\n")
     
-    # 중복 행 개수 출력력
-    duplicate_count = df.duplicated().sum()  # 각 컬럼별 중복 개수수
+    # 중복 행 개수 출력
+    duplicate_count = df.duplicated().sum()  # 각 컬럼별 중복 개수
     print(f"📎 {file} 중복된 행 개수: {duplicate_count}개\n")
     print("="*50, "\n")
