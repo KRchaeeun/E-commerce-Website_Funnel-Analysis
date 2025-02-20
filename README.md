@@ -245,7 +245,7 @@ for case, df in invalid_cases.items():
 - Identify at which stage users drop off the most.
 
 <p align="center">
-   <img src="./readme_img/funnel_result.png" alt="result of funnel analysis" width="30%">
+   <img src="./readme_img/funnel_result.png" alt="result of funnel analysis" width="40%">
 </p>
 
 ### 📌 Funnel Analysis
