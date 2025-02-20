@@ -70,22 +70,18 @@ This flow shows how users move from the homepage to the search page, proceed to 
 
 ### 📌 Handling Missing Values
 - No missing values were found in any of the files.
-<p style="margin-left: 35px;">
-  <img src="./readme_img/missing1.png" alt="number of missing data" width="60%">
-</p>
-<p style="margin-left: 35px;">
-  <img src="./readme_img/missing2.png" alt="number of missing data" width="60%">
-</p>
-<p style="margin-left: 35px;">
-  <img src="./readme_img/missing3.png" alt="number of missing data" width="30%">
-</p>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="./readme_img/missing1.png" alt="number of missing data" width="60%">
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="./readme_img/missing2.png" alt="number of missing data" width="60%">
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="./readme_img/missing3.png" alt="number of missing data" width="30%">
 
 
 ### 📌 Removing Duplicates
 - No duplicate rows were found in any of the files.
-<p style="margin-left: 35px;">
-  <img src="./readme_img/duplicate.png" alt="number of duplicates data" width="30%">
-</p>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="./readme_img/duplicate.png" alt="number of duplicates data" width="30%">
 
 ### 📌 Data Merging
 
@@ -136,6 +132,5 @@ Check for anomalies in the data, such as:
 <br>
 
 - No anomalies were found.
-<p style="margin-left: 35px;">
-  <img src="./readme_img/anomalies.png" alt="anomalies data" width="30%">
-</p>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="./readme_img/anomalies.png" alt="anomalies data" width="30%">
