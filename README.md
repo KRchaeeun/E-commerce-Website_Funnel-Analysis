@@ -49,6 +49,35 @@ This dataset allows the analysis of the **drop-off rate** and **conversion rate*
 
 This flow shows how users move from the homepage to the search page, proceed to the payment page, and finally reach the payment confirmation step. The funnel analysis will help identify the drop-off rates at each stage, providing insights into where users are leaving the site.
 
+### 📌 Python Code
+```python
+# 데이터 불러오기
+for file in file_names:
+    file_path = os.path.join(data_path, file)
+    df = pd.read_csv(file_path)
+    
+    # 데이터 저장 (딕셔너리 형태로 저장)
+    dataframes[file] = df
+    
+    # 기본 정보 출력
+    print(f"📎{file} 데이터셋 개요")
+    print(df.info(), "\n")  # 데이터 타입 및 결측치 확인
+    print(df.head(), "\n")  # 상위 5개 행 출력
+    print("="*50, "\n")  # 가독성을 위해...
+    
+    # 결측치 개수 출력
+    missing_values = df.isnull().sum()  # 각 컬럼별 결측치 개수
+    print(f"❗ {file} 결측치 개수:\n{missing_values}\n")
+    print("="*50, "\n")
+    
+    # 중복 행 개수 출력력
+    duplicate_count = df.duplicated().sum()  # 각 컬럼별 중복 개수수
+    print(f"📎 {file} 중복된 행 개수: {duplicate_count}개\n")
+    print("="*50, "\n")
+```
+
+<br>
+
 ## Data Preprocessing
 
 ### 📌 Data Preprocessing Steps
@@ -140,3 +169,58 @@ Check for anomalies in the data, such as:
 <p align="center">
    <img src="./readme_img/anomalies.png" alt="anomalies data" width="30%">
 </p>
+
+### 📌 Python Code
+```python
+# CSV 파일 불러오기
+home = pd.read_csv(os.path.join(data_path, "home_page_table.csv"))
+search = pd.read_csv(os.path.join(data_path, "search_page_table.csv"))
+payment = pd.read_csv(os.path.join(data_path, "payment_page_table.csv"))
+confirmation = pd.read_csv(os.path.join(data_path, "payment_confirmation_table.csv"))
+users = pd.read_csv(os.path.join(data_path, "user_table.csv"))
+
+# 단계별 방문 여부 컬럼 추가
+home["home_visited"] = 1
+search["search_visited"] = 1
+payment["payment_visited"] = 1
+confirmation["payment_confirmed"] = 1
+
+# 병합 (user_id 기준으로 LEFT 조인)
+merged_df = users.merge(home[["user_id", "home_visited"]], on="user_id", how="left")
+merged_df = merged_df.merge(search[["user_id", "search_visited"]], on="user_id", how="left")
+merged_df = merged_df.merge(payment[["user_id", "payment_visited"]], on="user_id", how="left")
+merged_df = merged_df.merge(confirmation[["user_id", "payment_confirmed"]], on="user_id", how="left")
+
+# 결측치(방문하지 않은 경우 NaN으로 입력됨) 
+# → 0으로 채우기
+merged_df.fillna(0, inplace=True)
+
+# 데이터 타입 정리 (int 변환) 
+# → 병합 과정에서 생긴 NaN 값이 0으로 변환되었지만 기본적으로 float 타입임
+merged_df[["home_visited", "search_visited", "payment_visited", "payment_confirmed"]] = merged_df[["home_visited", "search_visited", "payment_visited", "payment_confirmed"]].astype(int)
+
+# 결과 확인
+print("📎 병합된 데이터 개요")
+print(merged_df.info(), "\n")
+print(merged_df.head(), "\n")
+
+# 병합된 데이터 저장
+merged_df.to_csv("merged_data.csv", index=False)
+print("✅ 병합된 데이터 저장 완료: merged_data.csv")
+
+# 병합된 데이터 define
+merged_df = pd.read_csv("merged_data.csv")
+
+# 비정상적인 funnel 흐름 데이터 확인
+invalid_cases = {
+    "검색 페이지 방문 but 홈페이지 미방문": merged_df[(merged_df["search_visited"] == 1) & (merged_df["home_visited"] == 0)],
+    "결제 페이지 방문 but 검색 페이지 미방문": merged_df[(merged_df["payment_visited"] == 1) & (merged_df["search_visited"] == 0)],
+    "결제 완료 but 결제 페이지 미방문": merged_df[(merged_df["payment_confirmed"] == 1) & (merged_df["payment_visited"] == 0)]
+}
+
+# 결과 출력
+for case, df in invalid_cases.items():
+    print(f"\n❗ {case}: {len(df)}건 발견")
+    if not df.empty:
+        print(df[["user_id", "home_visited", "search_visited", "payment_visited", "payment_confirmed"]].head())
+```
