@@ -162,7 +162,7 @@ print("="*50, "\n")
   <img src="./readme_img/merged_overview.png" alt="overview merged data" width="55%">
 </p>
 
-### 🖍️ Additional Checks
+### 📌 Additional Checks
 Check for anomalies in the data, such as:  
 1. Users visiting the **search page** without visiting the **homepage**  
 2. Users visiting the **payment page** without visiting the **search page**  
@@ -281,10 +281,8 @@ confirmed_dropoff = 100 - confirmed_conversion
 
 # 데이터프레임 생성
 funnel_data = pd.DataFrame({
-    "단계": ["홈페이지 방문", "검색 페이지 방문", "결제 페이지 방문", "결제 완료"],
-    "사용자 수": [home_users, search_users, payment_users, confirmed_users],
-    "전환율(%)": [100, search_conversion, payment_conversion, confirmed_conversion],  # 첫 단계는 100%
-    "이탈률(%)": [0, search_dropoff, payment_dropoff, confirmed_dropoff]  # 첫 단계는 0%
+    "STEP": ["홈페이지 방문", "검색 페이지 방문", "결제 페이지 방문", "결제 완료"],
+    "USERS": [home_users, search_users, payment_users, confirmed_users]
 })
 
 # 결과 출력
@@ -293,10 +291,14 @@ print(funnel_data)
 
 
 # CSV 저장 (Excel 한글 깨짐 방지를 위한 encoding)
-# → 데이터가 크거나 일관된 전환율이 필요하다면 
-# Python에서 전환율과 이탈률을 계산 후, Tableau에서 시각화하는게 더 유리하지만 
-# 해당 데이터는 크지 않으므로 이 프로젝트에서는 Tableau에서 따로 계산 후 시각화함
-# 연습삼아 계산 후 파일 저장까지 진행
 funnel_data.to_csv("funnel_analysis.csv", index=False, encoding="utf-8-sig")
 print("\n✅ Funnel 분석 데이터 저장 완료: funnel_analysis.csv")
 ```
+
+<br>
+
+## Visualization Dashboard
+
+<br>
+
+## Identify Issues & Suggest Improvements

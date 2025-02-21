@@ -20,12 +20,38 @@ search_dropoff = 100 - search_conversion
 payment_dropoff = 100 - payment_conversion
 confirmed_dropoff = 100 - confirmed_conversion
 
-# 데이터프레임 생성
+# 날짜 컬럼 변환 (월별, 일별 추출)
+merged_df["date"] = pd.to_datetime(merged_df["date"])
+merged_df["month"] = merged_df["date"].dt.to_period("M")  # 'YYYY-MM' 형태
+
+# 성별, 기기별 사용자 수 계산
+def get_user_counts(df, column, value):
+    return [
+        df[df[column] == value]["home_visited"].sum(),
+        df[df[column] == value]["search_visited"].sum(),
+        df[df[column] == value]["payment_visited"].sum(),
+        df[df[column] == value]["payment_confirmed"].sum()
+    ]
+    
+# 성별 사용자 수 계산
+male_users = get_user_counts(merged_df, "sex", "Male")
+female_users = get_user_counts(merged_df, "sex", "Female")
+
+# 기기별 사용자 수 계산
+desktop_users = get_user_counts(merged_df, "device", "Desktop")
+mobile_users = get_user_counts(merged_df, "device", "Mobile")
+
+# 월별 사용자 수 계산
+monthly_users = merged_df.groupby("month")[["home_visited", "search_visited", "payment_visited", "payment_confirmed"]].sum().reset_index()
+
+# Funnel Summary 데이터프레임 생성
 funnel_data = pd.DataFrame({
-    "단계": ["홈페이지 방문", "검색 페이지 방문", "결제 페이지 방문", "결제 완료"],
-    "사용자 수": [home_users, search_users, payment_users, confirmed_users],
-    "전환율(%)": [100, search_conversion, payment_conversion, confirmed_conversion],  # 첫 단계는 100%
-    "이탈률(%)": [0, search_dropoff, payment_dropoff, confirmed_dropoff]  # 첫 단계는 0%
+    "STEP": ["홈페이지 방문", "검색 페이지 방문", "결제 페이지 방문", "결제 완료"],
+    "USERS": [home_users, search_users, payment_users, confirmed_users],
+    "MALE_USERS": [male_users[0], male_users[1], male_users[2], male_users[3]],
+    "FEMALE_USERS": [female_users[0], female_users[1], female_users[2], female_users[3]],
+    "DESKTOP_USERS": [desktop_users[0], desktop_users[1], desktop_users[2], desktop_users[3]],
+    "MOBILE_USERS": [mobile_users[0], mobile_users[1], mobile_users[2], mobile_users[3]]
 })
 
 # 결과 출력
@@ -33,9 +59,10 @@ print("\n📌 단계별 Funnel 분석 결과")
 print(funnel_data)
 
 # CSV 저장 (Excel 한글 깨짐 방지를 위한 encoding)
-# → 데이터가 크거나 일관된 전환율이 필요하다면 
-# Python에서 전환율과 이탈률을 계산 후, Tableau에서 시각화하는게 더 유리하지만 
-# 해당 데이터는 크지 않으므로 이 프로젝트에서는 Tableau에서 따로 계산 후 시각화함
-# 연습삼아 계산 후 파일 저장까지 진행
 funnel_data.to_csv("funnel_analysis.csv", index=False, encoding="utf-8-sig")
+
+# 월별 사용자 수 저장
+monthly_users.to_csv("funnel_monthly_analysis.csv", index=False, encoding="utf-8-sig")
+
 print("\n✅ Funnel 분석 데이터 저장 완료: funnel_analysis.csv")
+print("✅ 월별 분석 데이터 저장 완료: funnel_monthly_analysis.csv")
