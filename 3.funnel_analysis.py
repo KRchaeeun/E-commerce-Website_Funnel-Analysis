@@ -20,9 +20,9 @@ search_dropoff = 100 - search_conversion
 payment_dropoff = 100 - payment_conversion
 confirmed_dropoff = 100 - confirmed_conversion
 
-# 날짜 컬럼 변환 (월별, 일별 추출)
+# 날짜 변환
 merged_df["date"] = pd.to_datetime(merged_df["date"])
-merged_df["month"] = merged_df["date"].dt.to_period("M")  # 'YYYY-MM' 형태
+merged_df["month"] = merged_df["date"].dt.to_period("M")
 
 # 성별, 기기별 사용자 수 계산
 def get_user_counts(df, column, value):
@@ -54,6 +54,21 @@ funnel_data = pd.DataFrame({
     "MOBILE_USERS": [mobile_users[0], mobile_users[1], mobile_users[2], mobile_users[3]]
 })
 
+# Funnel Monthly 데이터프레임 생성
+funnel_monthly = pd.DataFrame({
+    "STEP": ["홈페이지 방문", "검색 페이지 방문", "결제 페이지 방문", "결제 완료"]
+})
+
+# 월별 데이터 변환
+for month in monthly_users["month"].astype(str).unique():
+    values = [
+        monthly_users.loc[monthly_users["month"].astype(str) == month, "home_visited"].values[0],
+        monthly_users.loc[monthly_users["month"].astype(str) == month, "search_visited"].values[0],
+        monthly_users.loc[monthly_users["month"].astype(str) == month, "payment_visited"].values[0],
+        monthly_users.loc[monthly_users["month"].astype(str) == month, "payment_confirmed"].values[0]
+    ]
+    funnel_monthly[month] = values
+
 # 결과 출력
 print("\n📌 단계별 Funnel 분석 결과")
 print(funnel_data)
@@ -62,7 +77,7 @@ print(funnel_data)
 funnel_data.to_csv("funnel_analysis.csv", index=False, encoding="utf-8-sig")
 
 # 월별 사용자 수 저장
-monthly_users.to_csv("funnel_monthly_analysis.csv", index=False, encoding="utf-8-sig")
+funnel_monthly.to_csv("funnel_monthly_analysis.csv", index=False, encoding="utf-8-sig")
 
 print("\n✅ Funnel 분석 데이터 저장 완료: funnel_analysis.csv")
 print("✅ 월별 분석 데이터 저장 완료: funnel_monthly_analysis.csv")
